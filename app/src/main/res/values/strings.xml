@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidPractice</string>
+    <string name="action_search">search</string>
+    <string name="action_backup">backup</string>
+    <string name="action_message">message</string>
+    <string name="action_scan">Scan QR Code</string>
+    <string name="action_top">Sticky on Top</string>
+    <string name="action_delete">Delete</string>
+</resources>

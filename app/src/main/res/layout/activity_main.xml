@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wentianyang.androidpractice.MainActivity"
+    >
+
+    <Button
+        android:id="@+id/btn_image_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ImageBar"
+        />
+
+    <Button
+        android:id="@+id/btn_color_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ColorBar"
+        app:layout_constraintTop_toBottomOf="@id/btn_image_bar"
+        />
+
+    <Button
+        android:id="@+id/btn_tool_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToolBar"
+        app:layout_constraintTop_toBottomOf="@id/btn_color_bar"
+        />
+
+    <Button
+        android:id="@+id/btn_rxjava"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RxJava"
+        app:layout_constraintTop_toBottomOf="@id/btn_tool_bar"
+        />
+
+</android.support.constraint.ConstraintLayout>
