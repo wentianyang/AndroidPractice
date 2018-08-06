@@ -1,4 +1,4 @@
-package com.wentianyang.androidpractice.ToolBar;
+package com.wentianyang.androidpractice.toolbar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package com.wentianyang.androidpractice.SystemBar;
+package com.wentianyang.androidpractice.systembar;
 
 import android.app.Activity;
 import android.content.Intent;

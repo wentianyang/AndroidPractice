@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -17,12 +18,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ToolBar$ToolBarActivity"/>
+        <activity android:name=".toolbar.ToolBarActivity"/>
 
-        <activity android:name=".SystemBar$ColorBarActivity"
-            android:theme="@style/ColorBarTheme"/>
+        <activity
+            android:name=".systembar.ColorBarActivity"/>
 
-        <activity android:name=".SystemBar$ImageBarActivity"
+        <activity
+            android:name=".systembar.ImageBarActivity"
             android:theme="@style/SystemBarTheme"/>
     </application>
 

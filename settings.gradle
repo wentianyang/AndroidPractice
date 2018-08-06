@@ -1,1 +1,1 @@
-include ':app', ':rxjavalib'
+include ':app', ':rxjavalib', ':routerlib'
