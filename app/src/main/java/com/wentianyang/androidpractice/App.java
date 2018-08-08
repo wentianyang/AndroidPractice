@@ -7,6 +7,7 @@ import com.wentianyang.androidpractice.action.imagebar.ImageBarAction;
 import com.wentianyang.androidpractice.action.imagebar.ImageBarActionName;
 import com.wentianyang.androidpractice.action.toolbar.ToolBarAction;
 import com.wentianyang.androidpractice.action.toolbar.ToolBarActionName;
+import com.wentianyang.base.BaseApp;
 import com.wentianyang.routerlib.Router;
 
 /**
@@ -15,13 +16,14 @@ import com.wentianyang.routerlib.Router;
  * @Description:
  **/
 
-public class App extends Application {
+public class App extends BaseApp {
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        registerAction();
+        initModulesApp(this);
+        initModulesData(this);
     }
 
     private void registerAction() {
@@ -29,5 +31,15 @@ public class App extends Application {
         Router.getInstance().registerActions(ImageBarActionName.NAME, new ImageBarAction());
         Router.getInstance().registerActions(ColorActionName.NAME, new ColorAction());
 //        Router.getInstance().registerActions(MainActionName.NAME, new MainAction());
+    }
+
+    @Override
+    protected void initModulesApp(Application application) {
+
+    }
+
+    @Override
+    protected void initModulesData(Application application) {
+
     }
 }
