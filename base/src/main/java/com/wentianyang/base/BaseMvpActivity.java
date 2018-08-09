@@ -8,4 +8,5 @@ package com.wentianyang.base;
 
 public abstract class BaseMvpActivity extends BaseActivity {
 
+
 }
