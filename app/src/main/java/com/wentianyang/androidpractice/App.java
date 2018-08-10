@@ -8,6 +8,7 @@ import com.wentianyang.androidpractice.action.imagebar.ImageBarActionName;
 import com.wentianyang.androidpractice.action.toolbar.ToolBarAction;
 import com.wentianyang.androidpractice.action.toolbar.ToolBarActionName;
 import com.wentianyang.base.BaseApp;
+import com.wentianyang.base.config.ConfigManager;
 import com.wentianyang.routerlib.Router;
 
 /**
@@ -18,9 +19,14 @@ import com.wentianyang.routerlib.Router;
 
 public class App extends BaseApp {
 
+    public static final String HOST = "";
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ConfigManager.init(this)
+            .withApiHost(HOST);
 
         initModulesApp(this);
         initModulesData(this);
