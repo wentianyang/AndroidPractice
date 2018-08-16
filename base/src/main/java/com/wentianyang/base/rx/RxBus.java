@@ -5,6 +5,7 @@ import com.jakewharton.rxrelay2.Relay;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.disposables.CompositeDisposable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -40,6 +41,9 @@ public class RxBus {
         mBus.accept(event);
     }
 
+    /**
+     * 订阅事件
+     */
     public <T> Observable<T> toObservable(Class<T> tClass) {
         return mBus.ofType(tClass);
     }
@@ -55,7 +59,7 @@ public class RxBus {
     /**
      * 发送一个Stick事件
      */
-    public void psotSticky(Object event) {
+    public void postSticky(Object event) {
         synchronized (mStickyEventMap) {
             mStickyEventMap.put(event.getClass(), event);
         }
@@ -107,6 +111,12 @@ public class RxBus {
     public void removeAllStickyEvents() {
         synchronized (mStickyEventMap) {
             mStickyEventMap.clear();
+        }
+    }
+
+    public static void rxBusUnbinder(CompositeDisposable disposable) {
+        if (!disposable.isDisposed()) {
+            disposable.clear();
         }
     }
 }

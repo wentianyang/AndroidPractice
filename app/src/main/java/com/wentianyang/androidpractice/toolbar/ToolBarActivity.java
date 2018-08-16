@@ -19,10 +19,13 @@ import com.wentianyang.androidpractice.BaseActivity;
 import com.wentianyang.androidpractice.R;
 import com.wentianyang.androidpractice.model.GankItem;
 import com.wentianyang.androidpractice.service.ApiService;
+import com.wentianyang.androidpractice.systembar.ColorBarActivity;
 import com.wentianyang.base.model.BaseModel;
 import com.wentianyang.base.network.HttpCreator;
 import com.wentianyang.base.rx.BaseError;
 import com.wentianyang.base.rx.BaseSubscriber;
+import com.wentianyang.base.rx.MsgEvent;
+import com.wentianyang.base.rx.RxBus;
 import com.wentianyang.base.rx.RxSchedulers;
 import java.util.List;
 
@@ -128,6 +131,8 @@ public class ToolBarActivity extends BaseActivity implements OnMenuItemClickList
                 return true;
             case R.id.action_search:
                 Toast.makeText(this, "search...", Toast.LENGTH_SHORT).show();
+                ColorBarActivity.startActivity(this);
+                RxBus.getInstance().postSticky(new MsgEvent(11, 45, "今天天气不好"));
                 return true;
             case R.id.action_scan:
                 Toast.makeText(this, "scan...", Toast.LENGTH_SHORT).show();
