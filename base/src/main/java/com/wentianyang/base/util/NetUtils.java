@@ -1,6 +1,8 @@
 package com.wentianyang.base.util;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 /**
  * @Date 创建时间:  2018/8/15
@@ -12,10 +14,11 @@ public class NetUtils {
 
     /**
      * 检查网络是否连接
-     * @param context
-     * @return
      */
-    public static boolean isConnted(Context context) {
-        return true;
+    public static boolean isConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context
+            .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

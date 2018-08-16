@@ -34,7 +34,7 @@ public class RxSchedulers {
                         @Override
                         public void accept(Subscription subscription) throws Exception {
                             // 检查网络连接
-                            if (!NetUtils.isConnted(context)) {
+                            if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
                                 // TODO: 2018/8/15 发送无网络事件
                             }
@@ -56,7 +56,7 @@ public class RxSchedulers {
                         @Override
                         public void accept(Subscription subscription) throws Exception {
                             // 检查网络连接
-                            if (!NetUtils.isConnted(context)) {
+                            if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
                             } else {
                                 if (dialog != null) {

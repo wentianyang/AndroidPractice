@@ -27,6 +27,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$supportlib_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -40,6 +41,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.1.1'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     // RxLifecycle
     implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
     // Retrofit
