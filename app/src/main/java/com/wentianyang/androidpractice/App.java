@@ -19,7 +19,7 @@ import com.wentianyang.routerlib.Router;
 
 public class App extends BaseApp {
 
-    public static final String HOST = "";
+    public static final String HOST = "http://gank.io/api/";
 
     @Override
     public void onCreate() {

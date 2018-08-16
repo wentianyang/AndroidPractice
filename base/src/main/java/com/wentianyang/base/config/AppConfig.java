@@ -13,7 +13,7 @@ public class AppConfig {
     private final HashMap<Object, Object> mConfigs = new HashMap<>();
 
     private AppConfig() {
-        mConfigs.put(ConfigKey.CONFIG_READY, false);
+        mConfigs.put(ConfigKey.CONFIG_READY, true);
     }
 
     public static AppConfig getInstance() {

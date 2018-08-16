@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -16,8 +17,18 @@ import android.widget.Toast;
 import butterknife.BindView;
 import com.wentianyang.androidpractice.BaseActivity;
 import com.wentianyang.androidpractice.R;
+import com.wentianyang.androidpractice.model.GankItem;
+import com.wentianyang.androidpractice.service.ApiService;
+import com.wentianyang.base.model.BaseModel;
+import com.wentianyang.base.network.HttpCreator;
+import com.wentianyang.base.rx.BaseError;
+import com.wentianyang.base.rx.BaseSubscriber;
+import com.wentianyang.base.rx.RxSchedulers;
+import java.util.List;
 
 public class ToolBarActivity extends BaseActivity implements OnMenuItemClickListener {
+
+    private static final String TAG = "ToolBarActivity";
 
     @BindView(R.id.tool_bar)
     Toolbar mToolbar;
@@ -100,6 +111,20 @@ public class ToolBarActivity extends BaseActivity implements OnMenuItemClickList
                 return true;
             case R.id.action_backup:
                 Toast.makeText(this, "backup...", Toast.LENGTH_SHORT).show();
+                ApiService service = new HttpCreator().createService(ApiService.class);
+                service.getGankData("福利", 10, 1)
+                    .compose(RxSchedulers.<BaseModel<List<GankItem>>>scheduler(this))
+                    .subscribeWith(new BaseSubscriber<List<GankItem>>() {
+                        @Override
+                        public void onSuccess(List<GankItem> s) {
+                            Log.d(TAG, "onSuccess: " + s);
+                        }
+
+                        @Override
+                        public void onFail(BaseError error) {
+                            Log.d(TAG, "onFail: " + error.getMessage());
+                        }
+                    });
                 return true;
             case R.id.action_search:
                 Toast.makeText(this, "search...", Toast.LENGTH_SHORT).show();
