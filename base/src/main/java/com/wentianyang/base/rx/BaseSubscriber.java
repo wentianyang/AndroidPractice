@@ -25,7 +25,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>>
     public void onNext(BaseModel<T> model) {
         if (model.isError()) {
             RxBus.getInstance().post("网络错误....");
-        }else {
+        } else {
             onSuccess(model.getResults());
         }
     }
@@ -60,6 +60,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>>
             baseError = new BaseError("未知错误", BaseError.ERROR_UNKNOW);
         }
         onFail(baseError);
+        RxBus.getInstance().post(new MsgEvent<BaseError>(baseError));
     }
 
     @Override

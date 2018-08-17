@@ -21,4 +21,8 @@ public class BaseError extends Exception {
         super(message);
         this.errorType = errorType;
     }
+
+    public int getErrorType() {
+        return errorType;
+    }
 }
