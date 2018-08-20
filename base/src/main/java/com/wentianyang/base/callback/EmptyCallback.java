@@ -1,15 +1,18 @@
 package com.wentianyang.base.callback;
 
 import com.kingja.loadsir.callback.Callback;
+import com.wentianyang.base.R;
 
 /**
- * Created by YTW on 2018/8/17.
- */
+ * @Date 创建时间:  2018/8/20
+ * @Author: YTW
+ * @Description:
+ **/
 
-public class EmptyCallback extends Callback{
+public class EmptyCallback extends Callback {
 
     @Override
     protected int onCreateView() {
-        return 0;
+        return R.layout.empty_layout;
     }
 }

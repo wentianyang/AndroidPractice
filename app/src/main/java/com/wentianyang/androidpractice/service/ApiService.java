@@ -19,4 +19,7 @@ public interface ApiService {
     Flowable<BaseModel<List<GankItem>>> getGankData(@Path("type") String type,
         @Path("number") int pageSize,
         @Path("page") int pageNum);
+
+//    @GET("#/discover/toplist")
+//    Flowable<BaseModel<List<GankItem>>> getGankData();
 }

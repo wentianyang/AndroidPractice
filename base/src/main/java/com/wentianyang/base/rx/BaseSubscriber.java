@@ -2,6 +2,7 @@ package com.wentianyang.base.rx;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;
+import com.wentianyang.base.SuccessEvent;
 import com.wentianyang.base.model.BaseModel;
 import io.reactivex.subscribers.ResourceSubscriber;
 import java.net.ConnectException;
@@ -27,6 +28,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>>
             RxBus.getInstance().post("网络错误....");
         } else {
             onSuccess(model.getResults());
+            RxBus.getInstance().post(new MsgEvent<>(new SuccessEvent()));
         }
     }
 
@@ -60,7 +62,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>>
             baseError = new BaseError("未知错误", BaseError.ERROR_UNKNOW);
         }
         onFail(baseError);
-        RxBus.getInstance().post(new MsgEvent<BaseError>(baseError));
+        RxBus.getInstance().post(new MsgEvent<>(baseError));
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.wentianyang.base.rx;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.util.Log;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -19,6 +20,7 @@ import org.reactivestreams.Subscription;
 
 public class RxSchedulers {
 
+    private static final String TAG = "RxSchedulers";
     /**
      * 基本调度
      */
@@ -33,10 +35,13 @@ public class RxSchedulers {
                         // doOnSubscribe() 执行在 subscribe() 发生的线程；而如果在 doOnSubscribe() 之后有 subscribeOn() 的话，它将执行在离它最近的 subscribeOn() 所指定的线程
                         @Override
                         public void accept(Subscription subscription) throws Exception {
+                            Log.d(TAG, "accept: " + NetUtils.isConnected(context));
                             // 检查网络连接
                             if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
-                                // TODO: 2018/8/15 发送无网络事件
+                                BaseError error = new BaseError("请检查网络连接...",
+                                    BaseError.ERROR_NO_NETWORK);
+                                RxBus.getInstance().post(new MsgEvent<>(error));
                             }
                         }
                     })

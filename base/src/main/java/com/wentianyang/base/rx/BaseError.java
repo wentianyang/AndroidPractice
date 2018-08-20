@@ -14,6 +14,7 @@ public class BaseError extends Exception {
     public static final int ERROR_TIME_OUT = 3;
     public static final int ERROR_UNKNOW_HOST = 4;
     public static final int ERROR_UNKNOW = 5;
+    public static final int ERROR_NO_NETWORK = 6;
 
     private int errorType;
 
