@@ -6,7 +6,7 @@ import com.wentianyang.base.config.AppConfig.ConfigKey;
 /**
  * @Date 创建时间:  2018/8/10
  * @Author: YTW
- * @Description:
+ * @Description:  获取配置信息
  **/
 
 public class ConfigManager {

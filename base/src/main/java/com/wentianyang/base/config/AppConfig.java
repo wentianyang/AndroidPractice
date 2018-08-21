@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * @Date 创建时间:  2018/8/10
  * @Author: YTW
- * @Description:
+ * @Description: App配置信息
  **/
 
 public class AppConfig {
