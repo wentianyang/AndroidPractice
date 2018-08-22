@@ -13,7 +13,7 @@ public class MsgEvent<T> {
     private String msg;
     private T data;
 
-    MsgEvent(T data) {
+    public MsgEvent(T data) {
         this.data = data;
     }
 

@@ -12,6 +12,7 @@ import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.callback.Callback.OnReloadListener;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.wentianyang.base.SuccessEvent;
 import com.wentianyang.base.callback.ConnectCallback;
@@ -203,5 +204,10 @@ public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>>
     private void showPageState(Class<? extends Callback> clazz) {
         registerPageState();
         mLoadService.showCallback(clazz);
+    }
+
+    @Override
+    public LifecycleTransformer bindLifecycle() {
+        return bindToLifecycle();
     }
 }

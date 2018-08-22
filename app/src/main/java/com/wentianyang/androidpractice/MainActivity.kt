@@ -33,6 +33,7 @@ class MainActivity : BaseActivity() {
                             .action(ImageBarActionName.NAME)
                             .data(ImageBarActivity.EXTRA_DATA, "from main"))
             Toast.makeText(this, routerResponse.result.toString(), Toast.LENGTH_SHORT).show()
+            UserActivity.startActivity(this)
         }
 
         btn_color_bar.setOnClickListener { ColorBarActivity.startActivity(this) }

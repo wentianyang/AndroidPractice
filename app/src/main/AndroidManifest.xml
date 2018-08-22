@@ -26,6 +26,8 @@
             android:theme="@style/SystemBarTheme"/>
         <activity android:name=".DemoActivity">
         </activity>
+        <activity android:name=".UserActivity">
+        </activity>
     </application>
 
 </manifest>

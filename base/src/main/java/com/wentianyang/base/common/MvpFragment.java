@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,26 @@ import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegate;
 import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegateImpl;
 import com.hannesdorfmann.mosby3.mvp.delegate.MvpDelegateCallback;
+import com.kingja.loadsir.callback.Callback;
+import com.kingja.loadsir.callback.Callback.OnReloadListener;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.wentianyang.base.SuccessEvent;
+import com.wentianyang.base.callback.ConnectCallback;
+import com.wentianyang.base.callback.NoNetworkCallback;
+import com.wentianyang.base.callback.ParseCallback;
+import com.wentianyang.base.callback.TimeOutCallback;
+import com.wentianyang.base.callback.UnKnowCallback;
+import com.wentianyang.base.callback.UnKnowHostCallback;
 import com.wentianyang.base.mvp.BaseView;
+import com.wentianyang.base.rx.BaseError;
+import com.wentianyang.base.rx.MsgEvent;
+import com.wentianyang.base.rx.RxBus;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @Date 创建时间:  2018/8/17
@@ -21,10 +40,11 @@ import com.wentianyang.base.mvp.BaseView;
  * @Description:
  **/
 public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>> extends RxFragment
-    implements FragmentMvpDelegate<V, P>, BaseView, MvpDelegateCallback<V, P> {
+    implements FragmentMvpDelegate<V, P>, BaseView, MvpDelegateCallback<V, P>, OnReloadListener {
+
+    private static final String TAG = "MvpFragment";
 
     protected FragmentMvpDelegate<V, P> mMvpDelegate;
-
     protected P mPresenter;
 
     // 第一次可见标识
@@ -36,6 +56,8 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
     // 视图创建完成标识
     private boolean isPrepared;
     protected Context mContext;
+    protected LoadService mLoadService;
+    protected View mRootView;
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -105,19 +127,38 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMvpDelegate().onCreate(savedInstanceState);
+        registerRxBus();
+    }
+
+    private void registerRxBus() {
+        RxBus.getInstance().toObservable(MsgEvent.class)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<MsgEvent>() {
+                @Override
+                public void accept(MsgEvent msgEvent) throws Exception {
+                    Object data = msgEvent.getData();
+                    if (data instanceof BaseError) {
+                        showError((BaseError) data);
+                    } else if (data instanceof SuccessEvent) {
+                        registerPageState();
+                        mLoadService.showSuccess();
+                    }
+                }
+            });
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
-        View view;
         if (getLayoutId() != 0) {
-            view = inflater.inflate(getLayoutId(), container, false);
+            mRootView = inflater.inflate(getLayoutId(), container, false);
         } else {
-            view = super.onCreateView(inflater, container, savedInstanceState);
+            mRootView = super.onCreateView(inflater, container, savedInstanceState);
         }
-        return view;
+        bindUI();
+        return mRootView;
     }
 
     @Override
@@ -212,4 +253,57 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
     public V getMvpView() {
         return (V) this;
     }
+
+    @Override
+    public LifecycleTransformer bindLifecycle() {
+        return bindToLifecycle();
+    }
+
+    @Override
+    public void showError(BaseError error) {
+        switch (error.getErrorType()) {
+            case BaseError.ERROR_CONNECT:
+                showPageState(ConnectCallback.class);
+                Log.d(TAG, "showError: ERROR_CONNECT");
+            case BaseError.ERROR_HTTP:
+                showPageState(ConnectCallback.class);
+                Log.d(TAG, "showError: ERROR_HTTP");
+                break;
+            case BaseError.ERROR_PARSE:
+                showPageState(ParseCallback.class);
+                Log.d(TAG, "showError: ERROR_PARSE");
+                break;
+            case BaseError.ERROR_TIME_OUT:
+                showPageState(TimeOutCallback.class);
+                Log.d(TAG, "showError: ERROR_TIME_OUT");
+                break;
+            case BaseError.ERROR_UNKNOW_HOST:
+                showPageState(UnKnowHostCallback.class);
+                Log.d(TAG, "showError: ERROR_UNKNOW_HOST");
+                break;
+            case BaseError.ERROR_UNKNOW:
+                showPageState(UnKnowCallback.class);
+                Log.d(TAG, "showError: ERROR_UNKNOW");
+                break;
+            case BaseError.ERROR_NO_NETWORK:
+                showPageState(NoNetworkCallback.class);
+                Log.d(TAG, "showError: ERROR_NO_NETWORK");
+                break;
+            default:
+        }
+    }
+
+    private void showPageState(Class<? extends Callback> clazz) {
+        registerPageState();
+        mLoadService.showCallback(clazz);
+    }
+
+    private void registerPageState() {
+        if (mLoadService == null) {
+            mLoadService = LoadSir.getDefault().register(mRootView, this);
+        }
+    }
+
+    @Override
+    public abstract void onReload(View v);
 }

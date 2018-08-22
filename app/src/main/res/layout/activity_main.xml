@@ -38,5 +38,4 @@
         android:text="RxJava"
         app:layout_constraintTop_toBottomOf="@id/btn_tool_bar"
         />
-
 </android.support.constraint.ConstraintLayout>
