@@ -53,7 +53,6 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
 
     @Override
     public void initData(Bundle savedInstanceState) {
-//        getPresenter().test();
     }
 
     @Override
