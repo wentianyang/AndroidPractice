@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.wentianyang.androidpractice.model.GankItem;
 import com.wentianyang.androidpractice.mvp.presenter.ToolbarPresenter;
 import com.wentianyang.androidpractice.mvp.view.ToolbarView;
@@ -54,7 +55,7 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+//        getPresenter().test();
     }
 
     @Override
@@ -71,5 +72,10 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
             sb.append(g.getUrl()).append("\n");
         }
         tv.setText(sb);
+    }
+
+    @Override
+    public LifecycleTransformer bindLifecycle() {
+        return bindToLifecycle();
     }
 }

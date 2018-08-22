@@ -26,6 +26,7 @@ public class ToolbarPresenter extends MvpBasePresenter<ToolbarView> {
     public void fetchData(Context context) {
         ApiService service = new HttpCreator().createService(ApiService.class);
         service.getGankData("福利", 10, 1)
+            .compose(getView().<BaseModel<List<GankItem>>>bindLifecycle())
             .compose(RxSchedulers.<BaseModel<List<GankItem>>>scheduler(context))
             .subscribeWith(new BaseSubscriber<List<GankItem>>() {
                 @Override
@@ -40,4 +41,19 @@ public class ToolbarPresenter extends MvpBasePresenter<ToolbarView> {
                 }
             });
     }
+
+//    public void test() {
+//        //循环发送数字
+//        Observable.interval(0, 1, TimeUnit.SECONDS)
+//            .subscribeOn(Schedulers.io())
+//            .compose(getView().<Long>bindLifecycle())   //这个订阅关系跟Activity绑定，Observable 和activity生命周期同步
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(
+//                new Consumer() {
+//                    @Override
+//                    public void accept(Object o) throws Exception {
+//                        System.out.println("lifecycle--" + o.toString());
+//                    }
+//                });
+//    }
 }

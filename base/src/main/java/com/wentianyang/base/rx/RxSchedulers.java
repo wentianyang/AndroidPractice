@@ -2,7 +2,6 @@ package com.wentianyang.base.rx;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.util.Log;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -35,7 +34,6 @@ public class RxSchedulers {
                         // doOnSubscribe() 执行在 subscribe() 发生的线程；而如果在 doOnSubscribe() 之后有 subscribeOn() 的话，它将执行在离它最近的 subscribeOn() 所指定的线程
                         @Override
                         public void accept(Subscription subscription) throws Exception {
-                            Log.d(TAG, "accept: " + NetUtils.isConnected(context));
                             // 检查网络连接
                             if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
