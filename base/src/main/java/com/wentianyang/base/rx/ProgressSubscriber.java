@@ -1,6 +1,7 @@
 package com.wentianyang.base.rx;
 
 import android.app.DialogFragment;
+import android.util.Log;
 
 /**
  * @Date 创建时间:  2018/8/15
@@ -9,6 +10,8 @@ import android.app.DialogFragment;
  **/
 
 public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
+
+    private static final String TAG = "ProgressSubscriber";
 
     private DialogFragment mDialogFragment;
 
@@ -19,6 +22,7 @@ public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
     @Override
     public void onError(Throwable t) {
         super.onError(t);
+        Log.d(TAG, "onError: " + mDialogFragment);
         if (mDialogFragment != null) {
             mDialogFragment.dismiss();
         }
@@ -27,6 +31,7 @@ public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
     @Override
     public void onComplete() {
         super.onComplete();
+        Log.d(TAG, "onComplete: " + mDialogFragment);
         if (mDialogFragment != null) {
             mDialogFragment.dismiss();
         }

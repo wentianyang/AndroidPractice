@@ -27,7 +27,7 @@ public class ToolbarPresenter extends MvpBasePresenter<ToolbarView> {
         ApiService service = new HttpCreator().createService(ApiService.class);
         service.getGankData("福利", 10, 1)
             .compose(getView().<BaseModel<List<GankItem>>>bindLifecycle())
-            .compose(RxSchedulers.<BaseModel<List<GankItem>>>scheduler(context))
+            .compose(RxSchedulers.<BaseModel<List<GankItem>>>schedulerWithProgress(context))
             .subscribeWith(new BaseSubscriber<List<GankItem>>() {
                 @Override
                 public void onSuccess(List<GankItem> s) {

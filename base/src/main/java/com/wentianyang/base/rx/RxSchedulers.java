@@ -1,7 +1,10 @@
 package com.wentianyang.base.rx;
 
-import android.app.DialogFragment;
+import android.app.Activity;
 import android.content.Context;
+import com.wentianyang.base.common.dialog.CommonDialogFragment;
+import com.wentianyang.base.common.dialog.CommonDialogFragment.OnDialogCancelListener;
+import com.wentianyang.base.common.dialog.DialogHelper;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -20,6 +23,7 @@ import org.reactivestreams.Subscription;
 public class RxSchedulers {
 
     private static final String TAG = "RxSchedulers";
+
     /**
      * 基本调度
      */
@@ -48,8 +52,10 @@ public class RxSchedulers {
         };
     }
 
-    public static <T> FlowableTransformer<T, T> scheduler(final Context context,
-        final DialogFragment dialog) {
+    /**
+     * 带进度条
+     */
+    public static <T> FlowableTransformer<T, T> schedulerWithProgress(final Context context) {
         return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> flowable) {
@@ -57,14 +63,20 @@ public class RxSchedulers {
                     .subscribeOn(Schedulers.io())
                     .doOnSubscribe(new Consumer<Subscription>() {
                         @Override
-                        public void accept(Subscription subscription) throws Exception {
+                        public void accept(final Subscription subscription) throws Exception {
                             // 检查网络连接
                             if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
                             } else {
-                                if (dialog != null) {
-                                    // TODO: 2018/8/15 Dialog 相关操作
-                                }
+                                // TODO: 2018/8/15 Dialog 相关操作
+                                CommonDialogFragment dialogFragment = DialogHelper
+                                    .showProgress(((Activity) context).getFragmentManager(),
+                                        "", true, new OnDialogCancelListener() {
+                                            @Override
+                                            public void onCancel() {
+                                                subscription.cancel();
+                                            }
+                                        });
                             }
                         }
                     })

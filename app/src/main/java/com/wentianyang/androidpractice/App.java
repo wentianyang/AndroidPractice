@@ -10,6 +10,7 @@ import com.wentianyang.androidpractice.action.toolbar.ToolBarAction;
 import com.wentianyang.androidpractice.action.toolbar.ToolBarActionName;
 import com.wentianyang.base.BaseApp;
 import com.wentianyang.base.callback.ConnectCallback;
+import com.wentianyang.base.callback.DefaultCallback;
 import com.wentianyang.base.callback.EmptyCallback;
 import com.wentianyang.base.callback.NoNetworkCallback;
 import com.wentianyang.base.callback.ParseCallback;
@@ -52,6 +53,8 @@ public class App extends BaseApp {
             .addCallback(new UnKnowCallback())
             .addCallback(new ParseCallback())
             .addCallback(new UnKnowHostCallback())
+            .addCallback(new DefaultCallback())
+            .setDefaultCallback(DefaultCallback.class)
             .commit();
     }
 

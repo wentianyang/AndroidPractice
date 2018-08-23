@@ -165,6 +165,8 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getMvpDelegate().onViewCreated(view, savedInstanceState);
+        // 注册状态页 默认显示进度条
+        registerPageState();
     }
 
     @Override

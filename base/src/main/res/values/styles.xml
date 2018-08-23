@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base_AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+
+        <!--不设置在6.0以上会出现 宽度不充满屏幕的情况-->
+        <item name="android:windowMinWidthMinor">90%</item>
+
+        <!--取消标题 如果在代码中设置title会无效-->
+        <item name="android:windowNoTitle">true</item>
+
+        <!--修改顶部标题背景颜色，具体颜色自己定， 可以是图片-->
+        <item name="android:topDark">@android:color/white</item>
+    </style>
+</resources>

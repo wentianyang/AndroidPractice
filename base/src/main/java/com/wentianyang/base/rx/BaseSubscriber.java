@@ -25,7 +25,6 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>>
     @Override
     public void onNext(BaseModel<T> model) {
         if (model.isError()) {
-//            RxBus.getInstance().post("网络错误....");
             onError(new ConnectException());
         } else {
             onSuccess(model.getResults());
