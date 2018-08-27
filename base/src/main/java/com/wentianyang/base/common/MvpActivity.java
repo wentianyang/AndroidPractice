@@ -21,6 +21,7 @@ import com.wentianyang.base.callback.ParseCallback;
 import com.wentianyang.base.callback.TimeOutCallback;
 import com.wentianyang.base.callback.UnKnowCallback;
 import com.wentianyang.base.callback.UnKnowHostCallback;
+import com.wentianyang.base.common.dialog.CommonDialogFragment;
 import com.wentianyang.base.mvp.BaseView;
 import com.wentianyang.base.rx.BaseError;
 import com.wentianyang.base.rx.MsgEvent;
@@ -209,5 +210,10 @@ public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>>
     @Override
     public LifecycleTransformer bindLifecycle() {
         return bindToLifecycle();
+    }
+
+    @Override
+    public CommonDialogFragment getProgressDialog() {
+        return null;
     }
 }
