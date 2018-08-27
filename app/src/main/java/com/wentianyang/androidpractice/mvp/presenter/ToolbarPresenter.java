@@ -6,10 +6,11 @@ import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.wentianyang.androidpractice.model.GankItem;
 import com.wentianyang.androidpractice.mvp.view.ToolbarView;
 import com.wentianyang.androidpractice.service.ApiService;
+import com.wentianyang.base.common.dialog.ProgressDialog;
 import com.wentianyang.base.model.BaseModel;
 import com.wentianyang.base.network.HttpCreator;
 import com.wentianyang.base.rx.BaseError;
-import com.wentianyang.base.rx.BaseSubscriber;
+import com.wentianyang.base.rx.ProgressSubscriber;
 import com.wentianyang.base.rx.RxSchedulers;
 import java.util.List;
 
@@ -24,11 +25,18 @@ public class ToolbarPresenter extends MvpBasePresenter<ToolbarView> {
     private static final String TAG = "ToolbarPresenter";
 
     public void fetchData(Context context) {
+
+//        CommonDialogFragment dialog = DialogHelper
+//            .showProgress(((Activity) context).getFragmentManager(),
+//                "", true, null);
+
+        ProgressDialog dialog = ProgressDialog.newInstance();
+
         ApiService service = new HttpCreator().createService(ApiService.class);
         service.getGankData("福利", 10, 1)
             .compose(getView().<BaseModel<List<GankItem>>>bindLifecycle())
-            .compose(RxSchedulers.<BaseModel<List<GankItem>>>schedulerWithProgress(context))
-            .subscribeWith(new BaseSubscriber<List<GankItem>>() {
+            .compose(RxSchedulers.<BaseModel<List<GankItem>>>schedulerWithProgress(context, dialog))
+            .subscribeWith(new ProgressSubscriber<List<GankItem>>(dialog) {
                 @Override
                 public void onSuccess(List<GankItem> s) {
                     Log.d(TAG, "onSuccess: " + s);

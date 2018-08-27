@@ -2,9 +2,9 @@ package com.wentianyang.base.rx;
 
 import android.app.Activity;
 import android.content.Context;
-import com.wentianyang.base.common.dialog.CommonDialogFragment;
-import com.wentianyang.base.common.dialog.CommonDialogFragment.OnDialogCancelListener;
-import com.wentianyang.base.common.dialog.DialogHelper;
+import com.wentianyang.base.common.dialog.BaseDialogFragment;
+import com.wentianyang.base.common.dialog.BaseDialogFragment.OnDialogCancelListener;
+import com.wentianyang.base.util.DimenUtils;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -55,7 +55,8 @@ public class RxSchedulers {
     /**
      * 带进度条
      */
-    public static <T> FlowableTransformer<T, T> schedulerWithProgress(final Context context) {
+    public static <T> FlowableTransformer<T, T> schedulerWithProgress(final Context context,
+        final BaseDialogFragment dialog) {
         return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> flowable) {
@@ -68,15 +69,15 @@ public class RxSchedulers {
                             if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
                             } else {
-                                // TODO: 2018/8/15 Dialog 相关操作
-                                CommonDialogFragment dialogFragment = DialogHelper
-                                    .showProgress(((Activity) context).getFragmentManager(),
-                                        "", true, new OnDialogCancelListener() {
-                                            @Override
-                                            public void onCancel() {
-                                                subscription.cancel();
-                                            }
-                                        });
+                                dialog.show(((Activity) context).getFragmentManager())
+                                    .setOutCancel(true)
+                                    .setSize(DimenUtils.dp2px(45), DimenUtils.dp2px(45))
+                                    .setDialogCancelListener(new OnDialogCancelListener() {
+                                        @Override
+                                        public void onCancel() {
+                                            subscription.cancel();
+                                        }
+                                    });
                             }
                         }
                     })
