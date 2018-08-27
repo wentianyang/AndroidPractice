@@ -1,7 +1,8 @@
 package com.wentianyang.base.rx;
 
-import android.app.DialogFragment;
+import android.app.Activity;
 import android.content.Context;
+import com.wentianyang.base.common.dialog.BaseDialogFragment;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -53,7 +54,7 @@ public class RxSchedulers {
      * 带进度条
      */
     public static <T> FlowableTransformer<T, T> schedulerWithProgress(final Context context,
-        DialogFragment dialog) {
+        final BaseDialogFragment dialog) {
         return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> flowable) {
@@ -75,6 +76,7 @@ public class RxSchedulers {
 //                                                subscription.cancel();
 //                                            }
 //                                        });
+                                dialog.show(((Activity) context).getFragmentManager());
                             }
                         }
                     })
