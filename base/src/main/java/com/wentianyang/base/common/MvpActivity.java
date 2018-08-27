@@ -1,5 +1,6 @@
 package com.wentianyang.base.common;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -58,6 +59,7 @@ public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>>
         registerRxBus();
     }
 
+    @SuppressLint("CheckResult")
     private void registerRxBus() {
         RxBus.getInstance().toObservable(MsgEvent.class)
             .subscribeOn(Schedulers.io())
