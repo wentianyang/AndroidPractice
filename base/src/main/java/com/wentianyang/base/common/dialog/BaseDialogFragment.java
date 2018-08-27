@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.FloatRange;
 import android.support.annotation.Nullable;
@@ -28,6 +29,8 @@ import com.wentianyang.base.util.ScreenUtils;
 public abstract class BaseDialogFragment extends DialogFragment {
 
     protected int mLayoutResId;
+
+    private OnDialogCancelListener mDialogCancelListener;
 
     private float mDimAmount = 0.5f; // 透明度
     private boolean mShowBottomEnable; // 是否底部显示
@@ -157,5 +160,22 @@ public abstract class BaseDialogFragment extends DialogFragment {
         return this;
     }
 
+    public void setDialogCancelListener(OnDialogCancelListener dialogCancelListener) {
+        mDialogCancelListener = dialogCancelListener;
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        if (mDialogCancelListener != null) {
+            mDialogCancelListener.onCancel();
+        }
+    }
+
     public abstract void convertView(ViewHolder holder, BaseDialogFragment dialog);
+
+    public interface OnDialogCancelListener {
+
+        void onCancel();
+    }
 }

@@ -3,6 +3,7 @@ package com.wentianyang.base.rx;
 import android.app.Activity;
 import android.content.Context;
 import com.wentianyang.base.common.dialog.BaseDialogFragment;
+import com.wentianyang.base.common.dialog.BaseDialogFragment.OnDialogCancelListener;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -67,16 +68,14 @@ public class RxSchedulers {
                             if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
                             } else {
-                                // TODO: 2018/8/15 Dialog 相关操作
-//                                CommonDialogFragment dialogFragment = DialogHelper
-//                                    .showProgress(((Activity) context).getFragmentManager(),
-//                                        "", true, new OnDialogCancelListener() {
-//                                            @Override
-//                                            public void onCancel() {
-//                                                subscription.cancel();
-//                                            }
-//                                        });
-                                dialog.show(((Activity) context).getFragmentManager());
+                                dialog.show(((Activity) context).getFragmentManager())
+                                    .setOutCancel(true)
+                                    .setDialogCancelListener(new OnDialogCancelListener() {
+                                        @Override
+                                        public void onCancel() {
+                                            subscription.cancel();
+                                        }
+                                    });
                             }
                         }
                     })
