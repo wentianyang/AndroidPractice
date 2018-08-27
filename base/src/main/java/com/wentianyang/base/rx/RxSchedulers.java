@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import com.wentianyang.base.common.dialog.BaseDialogFragment;
 import com.wentianyang.base.common.dialog.BaseDialogFragment.OnDialogCancelListener;
+import com.wentianyang.base.util.DimenUtils;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -70,6 +71,7 @@ public class RxSchedulers {
                             } else {
                                 dialog.show(((Activity) context).getFragmentManager())
                                     .setOutCancel(true)
+                                    .setSize(DimenUtils.dp2px(45), DimenUtils.dp2px(45))
                                     .setDialogCancelListener(new OnDialogCancelListener() {
                                         @Override
                                         public void onCancel() {
