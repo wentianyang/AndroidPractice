@@ -1,4 +1,4 @@
-package com.wentianyang.base;
+package com.wentianyang.base.EventBus;
 
 /**
  * @Date 创建时间:  2018/8/20

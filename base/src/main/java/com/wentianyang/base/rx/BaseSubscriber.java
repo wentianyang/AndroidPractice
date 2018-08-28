@@ -2,7 +2,8 @@ package com.wentianyang.base.rx;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;
-import com.wentianyang.base.SuccessEvent;
+import com.wentianyang.base.EventBus.MsgEvent;
+import com.wentianyang.base.EventBus.SuccessEvent;
 import com.wentianyang.base.model.BaseModel;
 import io.reactivex.subscribers.ResourceSubscriber;
 import java.net.ConnectException;

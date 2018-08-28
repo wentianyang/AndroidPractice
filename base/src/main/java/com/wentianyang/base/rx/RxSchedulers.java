@@ -2,6 +2,7 @@ package com.wentianyang.base.rx;
 
 import android.app.Activity;
 import android.content.Context;
+import com.wentianyang.base.EventBus.MsgEvent;
 import com.wentianyang.base.common.dialog.BaseDialogFragment;
 import com.wentianyang.base.common.dialog.BaseDialogFragment.OnDialogCancelListener;
 import com.wentianyang.base.util.DimenUtils;

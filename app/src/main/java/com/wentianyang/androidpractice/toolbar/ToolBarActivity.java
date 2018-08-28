@@ -18,7 +18,7 @@ import com.wentianyang.androidpractice.BaseActivity;
 import com.wentianyang.androidpractice.DemoActivity;
 import com.wentianyang.androidpractice.R;
 import com.wentianyang.androidpractice.systembar.ColorBarActivity;
-import com.wentianyang.base.rx.MsgEvent;
+import com.wentianyang.base.EventBus.MsgEvent;
 import com.wentianyang.base.rx.RxBus;
 
 public class ToolBarActivity extends BaseActivity implements OnMenuItemClickListener {
