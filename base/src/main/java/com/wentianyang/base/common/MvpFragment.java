@@ -26,7 +26,8 @@ import com.wentianyang.base.callback.ParseCallback;
 import com.wentianyang.base.callback.TimeOutCallback;
 import com.wentianyang.base.callback.UnKnowCallback;
 import com.wentianyang.base.callback.UnKnowHostCallback;
-import com.wentianyang.base.common.dialog.CommonDialogFragment;
+import com.wentianyang.base.common.dialog.BaseDialogFragment;
+import com.wentianyang.base.common.dialog.ProgressDialog;
 import com.wentianyang.base.mvp.BaseView;
 import com.wentianyang.base.rx.BaseError;
 import com.wentianyang.base.rx.MsgEvent;
@@ -59,6 +60,7 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
     protected Context mContext;
     protected LoadService mLoadService;
     protected View mRootView;
+    private ProgressDialog mProgressDialog;
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -311,7 +313,25 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
     public abstract void onReload(View v);
 
     @Override
-    public CommonDialogFragment getProgressDialog() {
-        return null;
+    public BaseDialogFragment getProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = ProgressDialog.newInstance();
+        }
+        return mProgressDialog;
+    }
+
+    @Override
+    public void showLoading() {
+        if (mProgressDialog == null) {
+            mProgressDialog = (ProgressDialog) getProgressDialog();
+        }
+        mProgressDialog.show(getActivity().getFragmentManager(), ProgressDialog.TAG);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
     }
 }

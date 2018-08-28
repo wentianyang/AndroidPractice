@@ -28,16 +28,6 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_demo;
     }

@@ -1,5 +1,6 @@
 package com.wentianyang.base.common.dialog;
 
+import android.annotation.SuppressLint;
 import com.wentianyang.base.R;
 
 /**
@@ -10,9 +11,15 @@ import com.wentianyang.base.R;
 
 public class ProgressDialog extends BaseDialogFragment {
 
+    public static final String TAG = "ProgressDialog";
+
+    @SuppressLint("ValidFragment")
+    private ProgressDialog() {
+
+    }
+
     public static ProgressDialog newInstance() {
-        ProgressDialog dialog = new ProgressDialog();
-        return dialog;
+        return new ProgressDialog();
     }
 
     @Override

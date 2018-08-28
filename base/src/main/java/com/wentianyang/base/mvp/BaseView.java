@@ -3,7 +3,7 @@ package com.wentianyang.base.mvp;
 import android.os.Bundle;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.wentianyang.base.common.dialog.CommonDialogFragment;
+import com.wentianyang.base.common.dialog.BaseDialogFragment;
 import com.wentianyang.base.rx.BaseError;
 
 /**
@@ -28,5 +28,5 @@ public interface BaseView extends MvpView {
 
     LifecycleTransformer bindLifecycle();
 
-    CommonDialogFragment getProgressDialog();
+    BaseDialogFragment getProgressDialog();
 }
