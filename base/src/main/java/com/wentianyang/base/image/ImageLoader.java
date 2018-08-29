@@ -51,6 +51,11 @@ public class ImageLoader implements ILoaderStrategy {
     }
 
     @Override
+    public void loadCircleImage(String url, int placeholder, ImageView imageView) {
+        mStrategy.loadCircleImage(url, placeholder, imageView);
+    }
+
+    @Override
     public void loadGifImage(String url, int placeholder, ImageView imageView) {
         mStrategy.loadGifImage(url, placeholder, imageView);
     }

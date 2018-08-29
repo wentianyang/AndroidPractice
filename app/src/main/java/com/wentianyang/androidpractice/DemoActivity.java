@@ -63,6 +63,6 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
             sb.append(g.getUrl()).append("\n");
         }
         tv.setText(sb);
-        ImageLoader.getInstance().loadImage(s.get(0).getUrl(), mImageView);
+        ImageLoader.getInstance().loadCircleImage(s.get(0).getUrl(), R.drawable.img, mImageView);
     }
 }

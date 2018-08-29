@@ -43,6 +43,7 @@ public class GlideStrategy implements ILoaderStrategy {
     public void loadCircleImage(String url, int placeholder, ImageView imageView) {
         RequestOptions options = new RequestOptions()
             .centerCrop()
+            .circleCrop()
             .placeholder(placeholder)
             .diskCacheStrategy(DiskCacheStrategy.ALL);
         loadImageWithOption(url, options, imageView);
@@ -50,7 +51,7 @@ public class GlideStrategy implements ILoaderStrategy {
 
     @SuppressLint("CheckResult")
     private void loadImageWithOption(String url, RequestOptions options, ImageView imageView) {
-        GlideApp.with(imageView.getContext()).load(url).apply(options);
+        GlideApp.with(imageView.getContext()).load(url).apply(options).into(imageView);
     }
 
     @Override
