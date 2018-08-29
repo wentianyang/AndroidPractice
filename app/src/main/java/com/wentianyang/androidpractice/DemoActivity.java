@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.wentianyang.androidpractice.model.GankItem;
 import com.wentianyang.androidpractice.mvp.presenter.ToolbarPresenter;
 import com.wentianyang.androidpractice.mvp.view.ToolbarView;
 import com.wentianyang.base.common.MvpActivity;
+import com.wentianyang.base.image.ImageLoader;
 import java.util.List;
 
 public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> implements
     ToolbarView {
+
+    private ImageView mImageView;
 
     public static void startActivity(Activity activity) {
         Intent intent = new Intent(activity, DemoActivity.class);
@@ -34,7 +38,7 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
 
     @Override
     public void bindUI() {
-
+        mImageView = findViewById(R.id.img);
     }
 
     public void fetchData(View view) {
@@ -59,5 +63,6 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
             sb.append(g.getUrl()).append("\n");
         }
         tv.setText(sb);
+        ImageLoader.getInstance().loadImage(s.get(0).getUrl(), mImageView);
     }
 }

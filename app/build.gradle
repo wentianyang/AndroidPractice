@@ -46,9 +46,6 @@ dependencies {
     implementation rootProject.ext.dependencies["rxlifecycle-components"]
     // PageState
     implementation rootProject.ext.dependencies["loadsir"]
-    // glide
-    implementation rootProject.ext.dependencies["glide"]
-    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
     implementation project(':rxjavalib')
     implementation project(':routerlib')
