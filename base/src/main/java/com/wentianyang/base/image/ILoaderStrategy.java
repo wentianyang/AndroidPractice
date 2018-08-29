@@ -16,6 +16,8 @@ public interface ILoaderStrategy {
 
     void loadImage(Context context, String url, int placeholder, ImageView imageView);
 
+    void loadCircleImage(String url, int placeholder, ImageView imageView);
+
     void loadGifImage(String url, int placeholder, ImageView imageView);
 
     void loadImageWithProgress(String url, ImageView imageView, ProgressListener listener);

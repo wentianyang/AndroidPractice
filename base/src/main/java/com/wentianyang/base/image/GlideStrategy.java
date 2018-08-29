@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.wentianyang.base.GlideApp;
 
@@ -39,6 +40,20 @@ public class GlideStrategy implements ILoaderStrategy {
     }
 
     @Override
+    public void loadCircleImage(String url, int placeholder, ImageView imageView) {
+        RequestOptions options = new RequestOptions()
+            .centerCrop()
+            .placeholder(placeholder)
+            .diskCacheStrategy(DiskCacheStrategy.ALL);
+        loadImageWithOption(url, options, imageView);
+    }
+
+    @SuppressLint("CheckResult")
+    private void loadImageWithOption(String url, RequestOptions options, ImageView imageView) {
+        GlideApp.with(imageView.getContext()).load(url).apply(options);
+    }
+
+    @Override
     public void loadGifImage(String url, int placeholder, ImageView imageView) {
         loadGif(imageView.getContext(), url, placeholder, imageView);
     }
@@ -48,7 +63,8 @@ public class GlideStrategy implements ILoaderStrategy {
     }
 
     @Override
-    public void loadGifWithProgress(String url, ImageView imageView, ProgressLoadListener listener) {
+    public void loadGifWithProgress(String url, ImageView imageView,
+        ProgressLoadListener listener) {
 
     }
 
@@ -92,7 +108,6 @@ public class GlideStrategy implements ILoaderStrategy {
     @SuppressLint("CheckResult")
     private void loadNormal(final Context context, final String url, int placeholder,
         ImageView imageView) {
-        final long startTime = System.currentTimeMillis();
         GlideApp.with(context)
             .load(url)
             .placeholder(placeholder)
