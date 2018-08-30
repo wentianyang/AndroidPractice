@@ -30,6 +30,11 @@ public class AppConfig {
         return this;
     }
 
+    public final AppConfig withLog(boolean log) {
+        mConfigs.put(ConfigKey.LOG, log);
+        return this;
+    }
+
     public HashMap<Object, Object> getConfigs() {
         return mConfigs;
     }
@@ -60,5 +65,6 @@ public class AppConfig {
         public static final String BASE_URL = "BASE_URL";
         public static final String CONFIG_READY = "CONFIG_READY";
         public static final String APP_CONTEXT = "APP_CONTEXT";
+        public static final String LOG = "LOG";
     }
 }

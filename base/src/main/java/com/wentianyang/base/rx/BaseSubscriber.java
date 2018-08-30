@@ -2,8 +2,9 @@ package com.wentianyang.base.rx;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;
-import com.wentianyang.base.EventBus.MsgEvent;
-import com.wentianyang.base.EventBus.SuccessEvent;
+import com.wentianyang.base.eventbus.MsgEvent;
+import com.wentianyang.base.eventbus.SuccessEvent;
+import com.wentianyang.base.log.LogUtils;
 import com.wentianyang.base.model.BaseModel;
 import io.reactivex.subscribers.ResourceSubscriber;
 import java.net.ConnectException;
@@ -21,8 +22,6 @@ import retrofit2.HttpException;
 
 public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>> {
 
-    private static final String TAG = "BaseSubscriber";
-
     @Override
     public void onNext(BaseModel<T> model) {
         if (model.isError()) {
@@ -35,6 +34,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<BaseModel<T>>
 
     @Override
     public void onError(Throwable t) {
+        LogUtils.e(t, "subscriber error");
         BaseError baseError;
 //        CompositeException exception = (CompositeException) t;
 //        if (exception.size() > 0) {

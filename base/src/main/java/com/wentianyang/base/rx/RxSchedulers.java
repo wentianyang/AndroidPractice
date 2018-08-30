@@ -2,7 +2,7 @@ package com.wentianyang.base.rx;
 
 import android.app.Activity;
 import android.content.Context;
-import com.wentianyang.base.EventBus.MsgEvent;
+import com.wentianyang.base.eventbus.MsgEvent;
 import com.wentianyang.base.common.dialog.BaseDialogFragment;
 import com.wentianyang.base.common.dialog.BaseDialogFragment.OnDialogCancelListener;
 import com.wentianyang.base.util.DimenUtils;
@@ -22,8 +22,6 @@ import org.reactivestreams.Subscription;
  **/
 
 public class RxSchedulers {
-
-    private static final String TAG = "RxSchedulers";
 
     /**
      * 基本调度
@@ -69,6 +67,9 @@ public class RxSchedulers {
                             // 检查网络连接
                             if (!NetUtils.isConnected(context)) {
                                 subscription.cancel();
+                                BaseError error = new BaseError("请检查网络连接...",
+                                    BaseError.ERROR_NO_NETWORK);
+                                RxBus.getInstance().post(new MsgEvent<>(error));
                             } else {
                                 dialog.show(((Activity) context).getFragmentManager())
                                     .setOutCancel(true)

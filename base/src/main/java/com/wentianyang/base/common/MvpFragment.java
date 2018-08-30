@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxFragment;
-import com.wentianyang.base.EventBus.SuccessEvent;
 import com.wentianyang.base.callback.ConnectCallback;
 import com.wentianyang.base.callback.NoNetworkCallback;
 import com.wentianyang.base.callback.ParseCallback;
@@ -28,9 +26,10 @@ import com.wentianyang.base.callback.UnKnowCallback;
 import com.wentianyang.base.callback.UnKnowHostCallback;
 import com.wentianyang.base.common.dialog.BaseDialogFragment;
 import com.wentianyang.base.common.dialog.ProgressDialog;
+import com.wentianyang.base.eventbus.MsgEvent;
+import com.wentianyang.base.eventbus.SuccessEvent;
 import com.wentianyang.base.mvp.BaseView;
 import com.wentianyang.base.rx.BaseError;
-import com.wentianyang.base.EventBus.MsgEvent;
 import com.wentianyang.base.rx.RxBus;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -43,8 +42,6 @@ import io.reactivex.schedulers.Schedulers;
  **/
 public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>> extends RxFragment
     implements FragmentMvpDelegate<V, P>, BaseView, MvpDelegateCallback<V, P>, OnReloadListener {
-
-    private static final String TAG = "MvpFragment";
 
     protected FragmentMvpDelegate<V, P> mMvpDelegate;
     protected P mPresenter;
@@ -269,30 +266,23 @@ public abstract class MvpFragment<V extends BaseView, P extends MvpPresenter<V>>
         switch (error.getErrorType()) {
             case BaseError.ERROR_CONNECT:
                 showPageState(ConnectCallback.class);
-                Log.d(TAG, "showError: ERROR_CONNECT");
             case BaseError.ERROR_HTTP:
                 showPageState(ConnectCallback.class);
-                Log.d(TAG, "showError: ERROR_HTTP");
                 break;
             case BaseError.ERROR_PARSE:
                 showPageState(ParseCallback.class);
-                Log.d(TAG, "showError: ERROR_PARSE");
                 break;
             case BaseError.ERROR_TIME_OUT:
                 showPageState(TimeOutCallback.class);
-                Log.d(TAG, "showError: ERROR_TIME_OUT");
                 break;
             case BaseError.ERROR_UNKNOW_HOST:
                 showPageState(UnKnowHostCallback.class);
-                Log.d(TAG, "showError: ERROR_UNKNOW_HOST");
                 break;
             case BaseError.ERROR_UNKNOW:
                 showPageState(UnKnowCallback.class);
-                Log.d(TAG, "showError: ERROR_UNKNOW");
                 break;
             case BaseError.ERROR_NO_NETWORK:
                 showPageState(NoNetworkCallback.class);
-                Log.d(TAG, "showError: ERROR_NO_NETWORK");
                 break;
             default:
         }

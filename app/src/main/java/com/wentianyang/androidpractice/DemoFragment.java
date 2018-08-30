@@ -10,9 +10,11 @@ import com.wentianyang.androidpractice.model.GankItem;
 import com.wentianyang.androidpractice.mvp.presenter.ToolbarPresenter;
 import com.wentianyang.androidpractice.mvp.view.ToolbarView;
 import com.wentianyang.base.common.MvpFragment;
+import com.wentianyang.base.log.LogUtils;
 import java.util.List;
 
-public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> implements ToolbarView {
+public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> implements
+    ToolbarView {
 
     public DemoFragment() {
     }
@@ -57,7 +59,7 @@ public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> imp
 
     @Override
     public void onSuccess(List<GankItem> s) {
-
+        LogUtils.d("data success " + s);
     }
 
     @Override

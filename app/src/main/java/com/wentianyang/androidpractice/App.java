@@ -1,7 +1,11 @@
 package com.wentianyang.androidpractice;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 import com.kingja.loadsir.core.LoadSir;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.wentianyang.androidpractice.action.colorbar.ColorAction;
 import com.wentianyang.androidpractice.action.colorbar.ColorActionName;
 import com.wentianyang.androidpractice.action.imagebar.ImageBarAction;
@@ -18,6 +22,7 @@ import com.wentianyang.base.callback.TimeOutCallback;
 import com.wentianyang.base.callback.UnKnowCallback;
 import com.wentianyang.base.callback.UnKnowHostCallback;
 import com.wentianyang.base.config.ConfigManager;
+import com.wentianyang.base.log.LogCatStrategy;
 import com.wentianyang.routerlib.Router;
 
 /**
@@ -36,12 +41,30 @@ public class App extends BaseApp {
         super.onCreate();
 
         ConfigManager.init(this)
-            .withApiHost(HOST);
+            .withApiHost(HOST)
+            .withLog(BuildConfig.DEBUG);
 
         configPageState();
+        configLogger();
 
         initModulesApp(this);
         initModulesData(this);
+    }
+
+    private void configLogger() {
+        PrettyFormatStrategy strategy = PrettyFormatStrategy.newBuilder()
+            .logStrategy(new LogCatStrategy())
+            .methodCount(0)
+            .methodOffset(7)
+            .showThreadInfo(false)
+            .tag("")
+            .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(strategy) {
+            @Override
+            public boolean isLoggable(int priority, @Nullable String tag) {
+                return BuildConfig.DEBUG;
+            }
+        });
     }
 
     private void configPageState() {

@@ -8,8 +8,10 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.module.AppGlideModule;
 
 /**
- * Created by YTW on 2018/8/29.
- */
+ * @Date 创建时间:  2018/8/30
+ * @Author: YTW
+ * @Description:
+ **/
 
 @GlideModule
 public class MyAppGlideModule extends AppGlideModule {

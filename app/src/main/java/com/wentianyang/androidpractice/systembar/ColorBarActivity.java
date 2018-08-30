@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import com.wentianyang.androidpractice.BaseActivity;
 import com.wentianyang.androidpractice.R;
-import com.wentianyang.base.EventBus.MsgEvent;
+import com.wentianyang.base.eventbus.MsgEvent;
 import com.wentianyang.base.rx.RxBus;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

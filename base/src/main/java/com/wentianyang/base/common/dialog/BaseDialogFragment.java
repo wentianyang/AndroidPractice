@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import com.wentianyang.base.R;
+import com.wentianyang.base.log.LogUtils;
 import com.wentianyang.base.util.DimenUtils;
 import com.wentianyang.base.util.ScreenUtils;
 
@@ -37,7 +38,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private int mMargin = 0; //左右边距
     private int mAnimStyle = 0; // 动画
     private boolean mOutCancel = true; // 点击外部取消
-    private Context mContext;
+    protected Context mContext;
     private int mWidth;
     private int mHeight;
 
@@ -168,6 +169,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
         if (mDialogCancelListener != null) {
+            LogUtils.d("dialog cancel...");
             mDialogCancelListener.onCancel();
         }
     }
