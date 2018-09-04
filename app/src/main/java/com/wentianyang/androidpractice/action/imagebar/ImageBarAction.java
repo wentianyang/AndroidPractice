@@ -3,7 +3,7 @@ package com.wentianyang.androidpractice.action.imagebar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import com.wentianyang.androidpractice.systembar.ImageBarActivity;
+import com.wentianyang.androidpractice.ImageBarActivity;
 import com.wentianyang.routerlib.RouterAction;
 import java.util.HashMap;
 

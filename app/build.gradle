@@ -27,6 +27,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //noinspection GradleCompatible
     implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["support-v4"]
     testImplementation rootProject.ext.dependencies["junit"]
@@ -46,7 +47,6 @@ dependencies {
     implementation rootProject.ext.dependencies["rxlifecycle-components"]
     // PageState
     implementation rootProject.ext.dependencies["loadsir"]
-
     implementation project(':rxjavalib')
     implementation project(':routerlib')
     implementation project(':base')

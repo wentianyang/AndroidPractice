@@ -7,14 +7,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import com.wentianyang.androidpractice.model.GankItem;
-import com.wentianyang.androidpractice.mvp.presenter.ToolbarPresenter;
-import com.wentianyang.androidpractice.mvp.view.ToolbarView;
+import com.wentianyang.androidpractice.mvp.presenter.GirlPresenter;
+import com.wentianyang.androidpractice.mvp.view.GirlView;
 import com.wentianyang.base.common.MvpFragment;
 import com.wentianyang.base.log.LogUtils;
 import java.util.List;
 
-public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> implements
-    ToolbarView {
+public class DemoFragment extends MvpFragment<GirlView, GirlPresenter> implements
+    GirlView {
 
     public DemoFragment() {
     }
@@ -48,8 +48,8 @@ public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> imp
 
     @NonNull
     @Override
-    public ToolbarPresenter createPresenter() {
-        return new ToolbarPresenter();
+    public GirlPresenter createPresenter() {
+        return new GirlPresenter();
     }
 
     @Override

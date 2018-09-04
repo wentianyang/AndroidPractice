@@ -10,7 +10,7 @@ import java.util.List;
  * @Description:
  **/
 
-public interface ToolbarView extends BaseView {
+public interface GirlView extends BaseView {
 
     void onSuccess(List<GankItem> s);
 }

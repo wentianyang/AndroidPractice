@@ -1,4 +1,4 @@
-package com.wentianyang.androidpractice.toolbar;
+package com.wentianyang.androidpractice;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,10 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
-import com.wentianyang.androidpractice.BaseActivity;
-import com.wentianyang.androidpractice.DemoActivity;
-import com.wentianyang.androidpractice.R;
-import com.wentianyang.androidpractice.systembar.ColorBarActivity;
 import com.wentianyang.base.eventbus.MsgEvent;
 import com.wentianyang.base.rx.RxBus;
 

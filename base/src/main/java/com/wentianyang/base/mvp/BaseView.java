@@ -12,9 +12,7 @@ import com.wentianyang.base.common.dialog.BaseDialogFragment;
  **/
 
 public interface BaseView extends MvpView {
-
-
-
+    
     void initData(Bundle savedInstanceState);
 
     LifecycleTransformer bindLifecycle();

@@ -6,9 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import com.wentianyang.androidpractice.action.imagebar.ImageBarActionName
 import com.wentianyang.androidpractice.service.ApiService
-import com.wentianyang.androidpractice.systembar.ColorBarActivity
-import com.wentianyang.androidpractice.systembar.ImageBarActivity
-import com.wentianyang.androidpractice.toolbar.ToolBarActivity
 import com.wentianyang.base.network.HttpCreator
 import com.wentianyang.routerlib.Router
 import com.wentianyang.routerlib.RouterRequest

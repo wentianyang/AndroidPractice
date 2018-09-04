@@ -19,10 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".toolbar.ToolBarActivity"/>
-        <activity android:name=".systembar.ColorBarActivity"/>
+        <activity android:name=".ToolBarActivity"/>
+        <activity android:name=".ColorBarActivity"/>
         <activity
-            android:name=".systembar.ImageBarActivity"
+            android:name=".ImageBarActivity"
             android:theme="@style/SystemBarTheme"/>
         <activity android:name=".DemoActivity">
         </activity>

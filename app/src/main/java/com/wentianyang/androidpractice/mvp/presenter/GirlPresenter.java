@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
 import com.wentianyang.androidpractice.model.GankItem;
-import com.wentianyang.androidpractice.mvp.view.ToolbarView;
+import com.wentianyang.androidpractice.mvp.view.GirlView;
 import com.wentianyang.androidpractice.service.ApiService;
 import com.wentianyang.base.model.BaseModel;
 import com.wentianyang.base.network.HttpCreator;
@@ -19,9 +19,9 @@ import java.util.List;
  * @Description:
  **/
 
-public class ToolbarPresenter extends MvpBasePresenter<ToolbarView> {
+public class GirlPresenter extends MvpBasePresenter<GirlView> {
 
-    private static final String TAG = "ToolbarPresenter";
+    private static final String TAG = "GirlPresenter";
 
     public void fetchData(Context context) {
 

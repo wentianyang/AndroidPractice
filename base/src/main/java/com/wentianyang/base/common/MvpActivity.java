@@ -122,30 +122,6 @@ public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>>
         return bindToLifecycle();
     }
 
-//    @Override
-//    public BaseDialogFragment getProgressDialog() {
-//        if (mProgressDialog == null) {
-//            mProgressDialog = ProgressDialog.newInstance();
-//        }
-//        return mProgressDialog;
-//    }
-//
-//    @Override
-//    public void showLoading() {
-//        if (mProgressDialog == null) {
-//            mProgressDialog = (ProgressDialog) getProgressDialog();
-//        }
-//        mProgressDialog.show(getFragmentManager(), ProgressDialog.TAG);
-//    }
-//
-//    @Override
-//    public void hideLoading() {
-//        if (mProgressDialog != null) {
-//            mProgressDialog.dismiss();
-//        }
-//    }
-
-
     @Override
     public BaseDialogFragment getLoadingDialog() {
         return super.getLoadingDialog();

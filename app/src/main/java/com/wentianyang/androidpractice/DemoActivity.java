@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.wentianyang.androidpractice.model.GankItem;
-import com.wentianyang.androidpractice.mvp.presenter.ToolbarPresenter;
-import com.wentianyang.androidpractice.mvp.view.ToolbarView;
+import com.wentianyang.androidpractice.mvp.presenter.GirlPresenter;
+import com.wentianyang.androidpractice.mvp.view.GirlView;
 import com.wentianyang.base.common.MvpActivity;
 import com.wentianyang.base.image.ImageLoader;
 import java.util.List;
 
-public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> implements
-    ToolbarView {
+public class DemoActivity extends MvpActivity<GirlView, GirlPresenter> implements
+    GirlView {
 
     private ImageView mImageView;
 
@@ -47,8 +47,8 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
 
     @NonNull
     @Override
-    public ToolbarPresenter createPresenter() {
-        return new ToolbarPresenter();
+    public GirlPresenter createPresenter() {
+        return new GirlPresenter();
     }
 
     public void fetchData(View view) {

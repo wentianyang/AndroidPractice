@@ -3,7 +3,7 @@ package com.wentianyang.androidpractice.action.colorbar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import com.wentianyang.androidpractice.systembar.ColorBarActivity;
+import com.wentianyang.androidpractice.ColorBarActivity;
 import com.wentianyang.routerlib.RouterAction;
 import java.util.HashMap;
 

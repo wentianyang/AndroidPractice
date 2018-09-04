@@ -1,10 +1,8 @@
-package com.wentianyang.androidpractice.systembar;
+package com.wentianyang.androidpractice;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import com.wentianyang.androidpractice.BaseActivity;
-import com.wentianyang.androidpractice.R;
 
 public class ImageBarActivity extends BaseActivity {
 
