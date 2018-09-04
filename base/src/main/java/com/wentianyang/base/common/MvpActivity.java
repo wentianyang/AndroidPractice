@@ -1,6 +1,5 @@
 package com.wentianyang.base.common;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,28 +7,10 @@ import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegate;
 import com.hannesdorfmann.mosby3.mvp.delegate.ActivityMvpDelegateImpl;
 import com.hannesdorfmann.mosby3.mvp.delegate.MvpDelegateCallback;
-import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.callback.Callback.OnReloadListener;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.wentianyang.base.callback.ConnectCallback;
-import com.wentianyang.base.callback.NoNetworkCallback;
-import com.wentianyang.base.callback.ParseCallback;
-import com.wentianyang.base.callback.TimeOutCallback;
-import com.wentianyang.base.callback.UnKnowCallback;
-import com.wentianyang.base.callback.UnKnowHostCallback;
 import com.wentianyang.base.common.dialog.BaseDialogFragment;
-import com.wentianyang.base.common.dialog.ProgressDialog;
-import com.wentianyang.base.eventbus.MsgEvent;
-import com.wentianyang.base.eventbus.SuccessEvent;
 import com.wentianyang.base.mvp.BaseView;
-import com.wentianyang.base.rx.BaseError;
-import com.wentianyang.base.rx.RxBus;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @Date 创建时间:  2018/8/17
@@ -38,71 +19,16 @@ import io.reactivex.schedulers.Schedulers;
  **/
 
 public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>> extends
-    RxAppCompatActivity implements BaseView, MvpDelegateCallback<V, P>, OnReloadListener {
+    BaseActivity implements BaseView, MvpDelegateCallback<V, P>, OnReloadListener {
 
     protected ActivityMvpDelegate mMvpDelegate;
     protected P mPresenter;
-    protected LoadService mLoadService;
-    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMvpDelegate().onCreate(savedInstanceState);
-
-        if (getLayoutId() > 0) {
-            setContentView(getLayoutId());
-            bindUI();
-        }
         initData(savedInstanceState);
-
-        registerRxBus();
-    }
-
-    @SuppressLint("CheckResult")
-    private void registerRxBus() {
-        RxBus.getInstance().toObservable(MsgEvent.class)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Consumer<MsgEvent>() {
-                @Override
-                public void accept(MsgEvent msgEvent) throws Exception {
-                    Object data = msgEvent.getData();
-                    if (data instanceof BaseError) {
-                        showError((BaseError) data);
-                    } else if (data instanceof SuccessEvent) {
-                        registerPageState();
-                        mLoadService.showSuccess();
-                    }
-                }
-            });
-    }
-
-    @Override
-    public void showError(BaseError error) {
-        switch (error.getErrorType()) {
-            case BaseError.ERROR_CONNECT:
-                showPageState(ConnectCallback.class);
-            case BaseError.ERROR_HTTP:
-                showPageState(ConnectCallback.class);
-                break;
-            case BaseError.ERROR_PARSE:
-                showPageState(ParseCallback.class);
-                break;
-            case BaseError.ERROR_TIME_OUT:
-                showPageState(TimeOutCallback.class);
-                break;
-            case BaseError.ERROR_UNKNOW_HOST:
-                showPageState(UnKnowHostCallback.class);
-                break;
-            case BaseError.ERROR_UNKNOW:
-                showPageState(UnKnowCallback.class);
-                break;
-            case BaseError.ERROR_NO_NETWORK:
-                showPageState(NoNetworkCallback.class);
-                break;
-            default:
-        }
     }
 
     @Override
@@ -190,42 +116,38 @@ public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>>
         return (V) this;
     }
 
-    private void registerPageState() {
-        if (mLoadService == null) {
-            mLoadService = LoadSir.getDefault().register(this, this);
-        }
-    }
-
-    private void showPageState(Class<? extends Callback> clazz) {
-        registerPageState();
-        mLoadService.showCallback(clazz);
-    }
 
     @Override
     public LifecycleTransformer bindLifecycle() {
         return bindToLifecycle();
     }
 
-    @Override
-    public BaseDialogFragment getProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = ProgressDialog.newInstance();
-        }
-        return mProgressDialog;
-    }
+//    @Override
+//    public BaseDialogFragment getProgressDialog() {
+//        if (mProgressDialog == null) {
+//            mProgressDialog = ProgressDialog.newInstance();
+//        }
+//        return mProgressDialog;
+//    }
+//
+//    @Override
+//    public void showLoading() {
+//        if (mProgressDialog == null) {
+//            mProgressDialog = (ProgressDialog) getProgressDialog();
+//        }
+//        mProgressDialog.show(getFragmentManager(), ProgressDialog.TAG);
+//    }
+//
+//    @Override
+//    public void hideLoading() {
+//        if (mProgressDialog != null) {
+//            mProgressDialog.dismiss();
+//        }
+//    }
+
 
     @Override
-    public void showLoading() {
-        if (mProgressDialog == null) {
-            mProgressDialog = (ProgressDialog) getProgressDialog();
-        }
-        mProgressDialog.show(getFragmentManager(), ProgressDialog.TAG);
-    }
-
-    @Override
-    public void hideLoading() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
+    public BaseDialogFragment getLoadingDialog() {
+        return super.getLoadingDialog();
     }
 }

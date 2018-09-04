@@ -25,20 +25,30 @@ public class DemoActivity extends MvpActivity<ToolbarView, ToolbarPresenter> imp
         activity.startActivity(intent);
     }
 
-    @NonNull
     @Override
-    public ToolbarPresenter createPresenter() {
-        return new ToolbarPresenter();
-    }
-
-    @Override
-    public int getLayoutId() {
+    public int getLayoutID() {
         return R.layout.activity_demo;
     }
 
     @Override
-    public void bindUI() {
+    public void initView() {
         mImageView = findViewById(R.id.img);
+    }
+
+    @Override
+    public boolean isStatusBarColor() {
+        return true;
+    }
+
+    @Override
+    public boolean enableEventBus() {
+        return true;
+    }
+
+    @NonNull
+    @Override
+    public ToolbarPresenter createPresenter() {
+        return new ToolbarPresenter();
     }
 
     public void fetchData(View view) {

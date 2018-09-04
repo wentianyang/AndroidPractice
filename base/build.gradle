@@ -68,4 +68,6 @@ dependencies {
     // ARouter
     api 'com.alibaba:arouter-api:1.4.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
+    // 状态栏
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
 }

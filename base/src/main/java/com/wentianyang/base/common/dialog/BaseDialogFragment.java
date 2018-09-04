@@ -101,6 +101,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
                 window.setWindowAnimations(mAnimStyle);
             }
 
+//            window.setBackgroundDrawableResource(android.R.color.transparent);
+
             window.setAttributes(params);
         }
         setCancelable(mOutCancel);

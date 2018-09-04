@@ -54,11 +54,11 @@ public class RxSchedulers {
     /**
      * 带进度条
      */
-    public static <T> FlowableTransformer<T, T> schedulerWithProgress(final Context context,
+    public static  FlowableTransformer schedulerWithProgress(final Context context,
         final BaseDialogFragment dialog) {
-        return new FlowableTransformer<T, T>() {
+        return new FlowableTransformer() {
             @Override
-            public Publisher<T> apply(Flowable<T> flowable) {
+            public Publisher apply(Flowable flowable) {
                 return flowable
                     .subscribeOn(Schedulers.io())
                     .doOnSubscribe(new Consumer<Subscription>() {

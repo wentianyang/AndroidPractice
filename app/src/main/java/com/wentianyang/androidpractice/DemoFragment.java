@@ -63,26 +63,6 @@ public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> imp
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_demo;
-    }
-
-    @Override
-    public void bindUI() {
-        loaded();
-    }
-
-    @Override
     public void initData(Bundle savedInstanceState) {
         getPresenter().fetchData(mContext);
     }
@@ -90,5 +70,20 @@ public class DemoFragment extends MvpFragment<ToolbarView, ToolbarPresenter> imp
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public int getLayoutID() {
+        return R.layout.fragment_demo;
+    }
+
+    @Override
+    public void initView() {
+        loaded();
+    }
+
+    @Override
+    public boolean enableEventBus() {
+        return true;
     }
 }
