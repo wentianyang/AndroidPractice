@@ -126,4 +126,9 @@ public abstract class MvpActivity<V extends BaseView, P extends MvpPresenter<V>>
     public BaseDialogFragment getLoadingDialog() {
         return super.getLoadingDialog();
     }
+
+    @Override
+    public IHub getIHub() {
+        return super.getIHub();
+    }
 }

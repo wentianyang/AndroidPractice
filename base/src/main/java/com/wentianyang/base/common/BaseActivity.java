@@ -35,7 +35,7 @@ import io.reactivex.schedulers.Schedulers;
  * @Description: 基本的Activity
  **/
 
-public abstract class BaseActivity extends RxAppCompatActivity implements IBaseInit,
+public abstract class BaseActivity extends RxAppCompatActivity implements IBaseInit, IHub,
     OnReloadListener {
 
     private ProgressDialog mProgressDialog;
@@ -139,9 +139,10 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseI
 
     @Override
     public void showLoading() {
-        if (mProgressDialog != null) {
-            mProgressDialog.show(getFragmentManager(), ProgressDialog.TAG);
+        if (mProgressDialog == null) {
+            mProgressDialog = (ProgressDialog) getLoadingDialog();
         }
+        mProgressDialog.show(getFragmentManager(), ProgressDialog.TAG);
     }
 
     @Override
@@ -151,9 +152,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseI
         }
     }
 
+    @Override
+    public IHub getIHub() {
+        return this;
+    }
+
     /**
      * 统一处理状态页
-     * @param error
      */
     @Override
     public void showPageStatus(BaseError error) {

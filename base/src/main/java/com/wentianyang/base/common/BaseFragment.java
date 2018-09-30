@@ -40,7 +40,7 @@ import io.reactivex.schedulers.Schedulers;
  * @Description:
  **/
 
-public abstract class BaseFragment extends RxFragment implements IBaseInit, OnReloadListener {
+public abstract class BaseFragment extends RxFragment implements IBaseInit, OnReloadListener, IHub {
 
     private ProgressDialog mProgressDialog;
     protected Context mContext;
@@ -175,6 +175,11 @@ public abstract class BaseFragment extends RxFragment implements IBaseInit, OnRe
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
+    }
+
+    @Override
+    public IHub getIHub() {
+        return this;
     }
 
     /**

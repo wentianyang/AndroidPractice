@@ -27,10 +27,6 @@ public interface IBaseInit {
 
     void showToast(String msg);
 
-    void showLoading();
-
-    void hideLoading();
-
     BaseDialogFragment getLoadingDialog();
 
     boolean enableEventBus();

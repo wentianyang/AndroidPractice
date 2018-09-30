@@ -15,8 +15,7 @@ import com.wentianyang.base.common.MvpActivity;
 import com.wentianyang.base.image.ImageLoader;
 import java.util.List;
 
-public class DemoActivity extends MvpActivity<GirlView, GirlPresenter> implements
-    GirlView {
+public class DemoActivity extends MvpActivity<GirlView, GirlPresenter> implements GirlView {
 
     private ImageView mImageView;
 

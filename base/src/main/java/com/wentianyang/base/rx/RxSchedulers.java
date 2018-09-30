@@ -1,11 +1,8 @@
 package com.wentianyang.base.rx;
 
-import android.app.Activity;
 import android.content.Context;
+import com.wentianyang.base.common.IHub;
 import com.wentianyang.base.eventbus.MsgEvent;
-import com.wentianyang.base.common.dialog.BaseDialogFragment;
-import com.wentianyang.base.common.dialog.BaseDialogFragment.OnDialogCancelListener;
-import com.wentianyang.base.util.DimenUtils;
 import com.wentianyang.base.util.NetUtils;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -55,7 +52,7 @@ public class RxSchedulers {
      * 带进度条
      */
     public static  FlowableTransformer schedulerWithProgress(final Context context,
-        final BaseDialogFragment dialog) {
+        final IHub hub) {
         return new FlowableTransformer() {
             @Override
             public Publisher apply(Flowable flowable) {
@@ -71,15 +68,16 @@ public class RxSchedulers {
                                     BaseError.ERROR_NO_NETWORK);
                                 RxBus.getInstance().post(new MsgEvent<>(error));
                             } else {
-                                dialog.show(((Activity) context).getFragmentManager())
-                                    .setOutCancel(true)
-                                    .setSize(DimenUtils.dp2px(45), DimenUtils.dp2px(45))
-                                    .setDialogCancelListener(new OnDialogCancelListener() {
-                                        @Override
-                                        public void onCancel() {
-                                            subscription.cancel();
-                                        }
-                                    });
+//                                dialog.show(((Activity) context).getFragmentManager())
+//                                    .setOutCancel(true)
+//                                    .setSize(DimenUtils.dp2px(45), DimenUtils.dp2px(45))
+//                                    .setDialogCancelListener(new OnDialogCancelListener() {
+//                                        @Override
+//                                        public void onCancel() {
+//                                            subscription.cancel();
+//                                        }
+//                                    });
+                                hub.showLoading();
                             }
                         }
                     })

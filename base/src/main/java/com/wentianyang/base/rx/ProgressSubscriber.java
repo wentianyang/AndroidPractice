@@ -1,6 +1,6 @@
 package com.wentianyang.base.rx;
 
-import android.app.DialogFragment;
+import com.wentianyang.base.common.IHub;
 
 /**
  * @Date 创建时间:  2018/8/15
@@ -10,25 +10,29 @@ import android.app.DialogFragment;
 
 public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
 
-    private DialogFragment mDialogFragment;
+    //    private DialogFragment mDialogFragment;
+    private IHub mIHub;
 
-    public ProgressSubscriber(DialogFragment dialogFragment) {
-        mDialogFragment = dialogFragment;
+    public ProgressSubscriber(IHub hub) {
+//        mDialogFragment = dialogFragment;
+        mIHub = hub;
     }
 
     @Override
     public void onError(Throwable t) {
         super.onError(t);
-        if (mDialogFragment != null) {
-            mDialogFragment.dismiss();
-        }
+//        if (mDialogFragment != null) {
+//            mDialogFragment.dismiss();
+//        }
+        mIHub.hideLoading();
     }
 
     @Override
     public void onComplete() {
         super.onComplete();
-        if (mDialogFragment != null) {
-            mDialogFragment.dismiss();
-        }
+//        if (mDialogFragment != null) {
+//            mDialogFragment.dismiss();
+//        }
+        mIHub.hideLoading();
     }
 }

@@ -28,8 +28,8 @@ public class GirlPresenter extends MvpBasePresenter<GirlView> {
         ApiService service = new HttpCreator().createService(ApiService.class);
         service.getGankData("福利", 10, 1)
             .compose(getView().<BaseModel<List<GankItem>>>bindLifecycle())
-            .compose(RxSchedulers.schedulerWithProgress(context, getView().getLoadingDialog()))
-            .subscribeWith(new ProgressSubscriber<List<GankItem>>(getView().getLoadingDialog()) {
+            .compose(RxSchedulers.schedulerWithProgress(context, getView().getIHub()))
+            .subscribeWith(new ProgressSubscriber<List<GankItem>>(getView().getIHub()) {
                 @Override
                 public void onSuccess(List<GankItem> s) {
                     Log.d(TAG, "onSuccess: " + s);
